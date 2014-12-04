@@ -47,4 +47,5 @@ then
 fi
 
 sudo service nginx reload
+sudo yunohost app setting $app unprotected_uris -v "/"
 sudo yunohost app ssowatconf
