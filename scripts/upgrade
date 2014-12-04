@@ -4,7 +4,6 @@ app=zoterosync
 #retrieve arguments
 domain=$(sudo yunohost app setting $app domain)
 path=$(sudo yunohost app setting $app path)
-admin=$(sudo yunohost app setting $app admin)
 is_public=$(sudo yunohost app setting $app is_public)
 api_key=$(sudo yunohost app setting $app api_key)
 user_id=$(sudo yunohost app setting $app user_id)
@@ -21,14 +20,15 @@ sudo sed -i "s/YNHAPIKEY/$api_key/" $final_path/settings.php
 sudo sed -i "s/YNHUSERID/$user_id/" $final_path/settings.php
 
 #configure nginx settings
-sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" ../conf/nginx.conf
-sudo sed -i "s@YNH_EXAMPLE_ALIAS@$final_path@g" ../conf/nginx.conf
+sed -i "s@YNH_WWW_PATH@$path@g" ../conf/nginx.conf
+sed -i "s@YNH_WWW_ALIAS@$final_path/@g" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 
-# If app is public, add url to SSOWat conf as skipped_uris
+# If app is public, add skipped_uris to SSOWat conf
+sudo yunohost app setting $app is_public -v "$is_public"
 if [ "$is_public" = "Yes" ];
 then
-	sudo yunohost app setting $app unprotected_uris -v "/"
+	sudo yunohost app setting $app skipped_uris -v "/"
 fi
 
 # Restart services
