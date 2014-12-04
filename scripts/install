@@ -39,10 +39,11 @@ sed -i "s@YNH_WWW_PATH@$path@g" ../conf/nginx.conf
 sed -i "s@YNH_WWW_ALIAS@$final_path/@g" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 
-# If app is private, remove url to SSOWat conf from skipped_uris
-if [ "$is_public" = "No" ];
+# If app is public, add skipped_uris to SSOWat conf
+sudo yunohost app setting $app is_public -v "$is_public"
+if [ "$is_public" = "Yes" ];
 then
-	sudo yunohost app setting $app unprotected_uris -d
+	sudo yunohost app setting $app skipped_uris -v "/"
 fi
 
 sudo service nginx reload

@@ -38,14 +38,14 @@
                 "default": "No"
             },
 			{
-                "name": "API_key",
+                "name": "api_key",
                 "ask": {
                     "en": "Enter your Zotero API key. Login to Zotero.org, navigate to Settings > Feeds/API and create a new API key. Give it a name and leave the other parametres unchanged. Once created, copy and paste the key.",
                     "fr": "Entrez ici votre clé API Zotero. Pour l'obtenir, rendez-vous sur Zotero.org, puis Settings > Feeds/API et create a new API key. Choisissez un nom et laissez les autres paramètres inchangés. Une fois la clé créée, copiez-là ici."
                 }
             },
 			{
-                "name": "user_ID",
+                "name": "user_id",
                 "ask": {
                     "en": "Enter here your Zotero userID for API calls. It can be found in zotero.org > Settings > Feeds/API.",
                     "fr": "Veuillez entrer ici votre Zotero userID pour l'appel API. Il se trouve sur zotero.org > Settings > Feeds/API."
