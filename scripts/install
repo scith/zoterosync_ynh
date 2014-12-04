@@ -15,10 +15,9 @@ if [[ ! $? -eq 0 ]]; then
 fi
 
 # Save app settings
-sudo yunohost app setting $app admin -v "$admin"
-sudo yunohost app setting $app is_public -v "$is_public"
 sudo yunohost app setting $app domain -v "$domain"
 sudo yunohost app setting $app path -v "$path"
+sudo yunohost app setting $app is_public -v "$is_public"
 sudo yunohost app setting $app api_key -v "$api_key"
 sudo yunohost app setting $app user_id -v "$user_id"
 
