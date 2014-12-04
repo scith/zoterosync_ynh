@@ -13,6 +13,8 @@ This means your attachment data is never stored on computers (clients or servers
 - View your synced attachments (incl. web snapshots) from any web browser without having to use zotero.org's storage server
 - Enjoy complete security with support for HTTPS connections
 
+A live demo is available at: http://blog.holz.ca/phpZoteroWebDAV-demo/
+
 TO BE DONE
 ----------
 - Multi-instance
