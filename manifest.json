@@ -40,7 +40,7 @@
 			{
                 "name": "api_key",
                 "ask": {
-                    "en": "Enter your Zotero API key. Login to Zotero.org, navigate to Settings > Feeds/API and create a new API key. Give it a name and leave the other parametres unchanged. Once created, copy and paste the key.",
+                    "en": "Enter your Zotero API key. Login to Zotero.org, navigate to Settings > Feeds/API and create a new API key. Give it a name and leave the other parameters unchanged. Once created, copy and paste the key.",
                     "fr": "Entrez ici votre clé API Zotero. Pour l'obtenir, rendez-vous sur Zotero.org, puis Settings > Feeds/API et create a new API key. Choisissez un nom et laissez les autres paramètres inchangés. Une fois la clé créée, copiez-là ici."
                 }
             },
