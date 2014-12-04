@@ -2,6 +2,7 @@ ZoteroSync for YunoHost (phpZoteroWebDAV)
 ----------------------------------------
 
 Warning: This YunoHost app is still in development. Use it at your own risk!
+At the moment, one app = one Zotero library. If you want to manage several libraries, you will need to install one app per user, enter their respective API and userID keys, and give them rights to their own app. I know it is not ideal but it is the way phpZoteroWebDAV works at the moment.
 
 Features
 --------
@@ -17,7 +18,9 @@ A live demo is available at: http://blog.holz.ca/phpZoteroWebDAV-demo/
 
 TO BE DONE
 ----------
-- Multi-instance
+- Check if BACKUP and RESTORE scripts are working
+- Find a better way to manage multiple users instead of multi-instance?
+- Improve user interface
 
 Installation and Configuration Instructions
 -------------------------------------------
