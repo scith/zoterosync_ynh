@@ -36,9 +36,12 @@ sudo sed -i "s/YNHUSERID/$5/" $final_path/settings.php
 
 
 #configure nginx settings
-sudo sed -i "s@YNH_WWW_PATH@$path@g" ../conf/nginx.conf
-sudo sed -i "s@YNH_WWW_ALIAS@$final_path@g" ../conf/nginx.conf
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+sed -i "s@YNH_WWW_PATH@$path@g" ../conf/nginx.conf
+sed -i "s@YNH_WWW_ALIAS@$final_path/@g" ../conf/nginx.conf
+nginxconf=/etc/nginx/conf.d/$domain.d/$app.conf
+sudo cp ../conf/nginx.conf $nginxconf
+sudo chown root: $nginxconf
+sudo chmod 600 $nginxconf
 
 # If app is private, remove url to SSOWat conf from skipped_uris
 if [ "$is_public" = "No" ];
