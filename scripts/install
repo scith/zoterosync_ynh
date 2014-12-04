@@ -31,8 +31,8 @@ sudo cp -a ../sources/* $final_path
 sudo chown -R root: $final_path
 
 # Change API_key and user_ID in settings.php
-sudo sed -i "s/YNHAPIKEY/$4/" $final_path/settings.php
-sudo sed -i "s/YNHUSERID/$5/" $final_path/settings.php
+sudo sed -i "s/YNHAPIKEY/$api_key/" $final_path/settings.php
+sudo sed -i "s/YNHUSERID/$user_id/" $final_path/settings.php
 
 
 #configure nginx settings
