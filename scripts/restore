@@ -1,0 +1,9 @@
+#! /bin/bash
+app=zoterosync
+app_path=/var/www/$app
+save_path=$1
+
+sudo cp $save_path/settings.php $app_path/
+sudo rm -rf $app_path/data
+sudo cp -R $save_path/data $app_path/
+sudo chown -R root: $app_path/data

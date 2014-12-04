@@ -1,0 +1,36 @@
+#! /bin/bash
+app=zoterosync
+
+#retrieve arguments
+domain=$(sudo yunohost app setting $app domain)
+path=$(sudo yunohost app setting $app path)
+admin=$(sudo yunohost app setting $app admin)
+is_public=$(sudo yunohost app setting $app is_public)
+api_key=$(sudo yunohost app setting $app api_key)
+user_id=$(sudo yunohost app setting $app user_id)
+
+# Remove trailing "/" for next commands
+path=${path%/}
+
+# Copy source files
+final_path=/var/www/$app
+sudo mkdir -p $final_path
+sudo cp -a ../sources/* $final_path
+sudo chown -R root: $final_path
+sudo sed -i "s/YNHAPIKEY/$api_key/" $final_path/settings.php
+sudo sed -i "s/YNHUSERID/$user_id/" $final_path/settings.php
+
+#configure nginx settings
+sudo sed -i "s@YNH_EXAMPLE_PATH@$path@g" ../conf/nginx.conf
+sudo sed -i "s@YNH_EXAMPLE_ALIAS@$final_path@g" ../conf/nginx.conf
+sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+
+# If app is public, add url to SSOWat conf as skipped_uris
+if [ "$is_public" = "Yes" ];
+then
+	sudo yunohost app setting $app unprotected_uris -v "/"
+fi
+
+# Restart services
+sudo service nginx reload
+sudo yunohost app ssowatconf

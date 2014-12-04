@@ -1,0 +1,50 @@
+#!/bin/bash
+$app=zoterosync
+
+# Retrieve arguments
+domain=$1
+path=$2
+is_public=$3
+api_key=$4
+user_id=$5
+
+# Check domain/path availability
+sudo yunohost app checkurl $domain$path -a $app
+if [[ ! $? -eq 0 ]]; then
+    exit 1
+fi
+
+# Save app settings
+sudo yunohost app setting $app admin -v "$admin"
+sudo yunohost app setting $app is_public -v "$is_public"
+sudo yunohost app setting $app domain -v "$domain"
+sudo yunohost app setting $app path -v "$path"
+sudo yunohost app setting $app api_key -v "$api_key"
+sudo yunohost app setting $app user_id -v "$user_id"
+
+# Copy files to the right place
+final_path=/var/www/$app
+sudo mkdir -p $final_path
+sudo cp -a ../sources/* $final_path
+
+# Files owned by root, www-data can just read
+sudo chown -R root: $final_path
+
+# Change API_key and user_ID in settings.php
+sudo sed -i "s/YNHAPIKEY/$4/" $final_path/settings.php
+sudo sed -i "s/YNHUSERID/$5/" $final_path/settings.php
+
+
+#configure nginx settings
+sudo sed -i "s@YNH_WWW_PATH@$path@g" ../conf/nginx.conf
+sudo sed -i "s@YNH_WWW_ALIAS@$final_path@g" ../conf/nginx.conf
+sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+
+# If app is private, remove url to SSOWat conf from skipped_uris
+if [ "$is_public" = "No" ];
+then
+	sudo yunohost app setting $app unprotected_uris -d
+fi
+
+sudo service nginx reload
+sudo yunohost app ssowatconf
