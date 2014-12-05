@@ -26,10 +26,8 @@ final_path=/var/www/$app
 sudo mkdir -p $final_path
 sudo cp -a ../sources/* $final_path
 
-# Files owned by root, www-data can just write /data and /cache
-sudo chown -R root: $final_path
-sudo chown -R www-data: $final_path/data
-sudo chown -R www-data: $final_path/cache
+# Files owned by www-data
+sudo chown -R www-data:www-data $final_path
 
 # Change API_key and user_ID in settings.php
 sudo sed -i "s/YNHAPIKEY/$api_key/" $final_path/settings.php

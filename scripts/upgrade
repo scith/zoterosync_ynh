@@ -15,9 +15,7 @@ path=${path%/}
 final_path=/var/www/$app
 sudo mkdir -p $final_path
 sudo cp -a ../sources/* $final_path
-sudo chown -R root: $final_path
-sudo chown -R www-data: $final_path/data
-sudo chown -R www-data: $final_path/cache
+sudo chown -R www-data:www-data $final_path
 sudo sed -i "s/YNHAPIKEY/$api_key/" $final_path/settings.php
 sudo sed -i "s/YNHUSERID/$user_id/" $final_path/settings.php
 
