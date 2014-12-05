@@ -7,3 +7,5 @@ sudo cp $save_path/settings.php $app_path/
 sudo rm -rf $app_path/data
 sudo cp -R $save_path/data $app_path/
 sudo chown -R root: $app_path/data
+sudo chown -R www-data: $app_path/data
+sudo chown -R www-data: $app_path/cache
